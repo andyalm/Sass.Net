@@ -1,0 +1,3 @@
+[submodule "src/winsass/libsass"]
+	path = src/winsass/libsass
+	url = git@github.com:andyalm/libsass.git

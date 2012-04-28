@@ -1,0 +1,11 @@
+[Oo]bj/
+[Bb]in/
+[Dd]ebug/
+[Rr]elease/
+*.suo
+*.user
+*.sdf
+*.opensdf
+_ReSharper*
+[Pp]ackages/*
+!repositories.config

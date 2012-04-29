@@ -49,6 +49,15 @@ namespace Sass.Net.NativeInterop
             }
         }
 
+        public void Refresh()
+        {
+            //if pointer is zero, the type hasn't been marshalled yet so there is nothing to refresh from
+            if(_nativePointer == IntPtr.Zero)
+                return;
+
+            _object = (T)Marshal.PtrToStructure(_nativePointer, typeof(T));
+        }
+
         public void Dispose()
         {
             if (_nativePointer != IntPtr.Zero)

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3A70C6C-3174-4F81-ADFD-4DDAEC042B88}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{28E62F82-E8C6-4D1B-BFF8-F9CC9916F455}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sass.Net</RootNamespace>
-    <AssemblyName>Sass.Net</AssemblyName>
+    <RootNamespace>Sass.Net.Console</RootNamespace>
+    <AssemblyName>Sass.Net.Console</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -20,9 +21,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,17 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NativeUtilities.cs" />
-    <Compile Include="SassCompiler.cs" />
-    <Compile Include="SassCompilerOptions.cs" />
-    <Compile Include="SassNative.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sass.Net.Tests\Sass.Net.Tests.csproj">
+      <Project>{b88fc564-a699-4464-b556-4c390b30b0a8}</Project>
+      <Name>Sass.Net.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sass.Net\Sass.Net.csproj">
+      <Project>{d3a70c6c-3174-4f81-adfd-4ddaec042b88}</Project>
+      <Name>Sass.Net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <ItemGroup>
-      <NativeDependency Include="$(MSBuildProjectDirectory)\..\winsass\bin\$(Configuration)\libsass.dll" />
-      <NativeDependency Include="$(MSBuildProjectDirectory)\..\winsass\bin\$(Configuration)\libsass.pdb" />
+      <NativeDependency Include="$(MSBuildProjectDirectory)\..\Sass.Net\bin\$(Configuration)\libsass.dll" />
+      <NativeDependency Include="$(MSBuildProjectDirectory)\..\Sass.Net\bin\$(Configuration)\libsass.pdb" />
     </ItemGroup>
     <Copy SourceFiles="@(NativeDependency)" DestinationFolder="$(OutDir)" />
   </Target>

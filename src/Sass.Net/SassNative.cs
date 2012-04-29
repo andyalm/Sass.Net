@@ -9,13 +9,12 @@ namespace Sass.Net
         public const CharSet DefaultCharSet = CharSet.Ansi;
 
         [DllImport("libsass.dll", CharSet = DefaultCharSet)]
-        public static extern int sass_compile(sass_context c_ctx);
+        public static extern int sass_compile(IntPtr c_ctx);
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = SassLibNative.DefaultCharSet)]
     internal class sass_options
     {
-
         /// int
         public int output_style;
 

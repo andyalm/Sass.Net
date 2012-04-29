@@ -6,24 +6,28 @@ namespace Sass.Net
 {
     public class SassCompiler
     {
+        private readonly SassCompilerOptions _options;
+
+        public SassCompiler(SassCompilerOptions options)
+        {
+            _options = options;
+        }
+        
         public string Compile(string rawSass)
         {
             var inputContext = new NativeWrapper<sass_context>();
-            NativeWrapper<sass_context> outputContext = null;
 
             try
             {
                 inputContext.Value.input_string = rawSass.ToPointer();
-                SassLibNative.sass_compile(inputContext.Value);
-                outputContext = new NativeWrapper<sass_context>(inputContext.Pointer);
+                SassLibNative.sass_compile(inputContext.Pointer);
+                inputContext.Refresh();
 
-                return outputContext.Value.output_string.ToManagedString();
+                return inputContext.Value.output_string.ToManagedString();
             }
             finally
             {
                 inputContext.Dispose();
-                if (outputContext != null)
-                    outputContext.Dispose();
             }
         }
     }
